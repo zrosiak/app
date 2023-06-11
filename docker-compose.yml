@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    networks:
+      - internal
+
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+    depends_on:
+      - database
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ./:/var/www
+    networks:
+      - internal
+
+  database:
+    container_name: database
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+    ports:
+      - 5433:5432
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
