@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Application\ActionHandler;
 
-use App\Domain\Service\EmployeeService;
+use App\Application\Service\EmployeeService;
 use App\Application\Payload\DelegationsListPayload;
 
 final class DelegationsListHandler

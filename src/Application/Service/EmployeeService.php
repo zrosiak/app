@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Service;
+namespace App\Application\Service;
 
 use App\Domain\Entity\Employee;
 use App\Domain\Factory\EmployeeFactory;

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Api\Action;
+namespace App\Ui\Api\Action;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Application\ActionHandler\CreateEmployeeHandler;
-use App\Application\Api\Response\CreateEmployeeResponse;
+use App\Ui\Api\Response\CreateEmployeeResponse;
 
 final class CreateEmployeeAction
 {

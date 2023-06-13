@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Api\Action;
+namespace App\Ui\Api\Action;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Application\Api\Response\NotFoundResponse;
+use App\Ui\Api\Response\NotFoundResponse;
 use App\Domain\Exception\EmployeeNotFoundException;
 use App\Application\ActionHandler\DelegationsListHandler;
-use App\Application\Api\Response\DelegationsListResponse;
+use App\Ui\Api\Response\DelegationsListResponse;
 
 final class DelegationsListAction
 {

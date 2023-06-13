@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Api\Response;
+namespace App\Ui\Api\Response;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Application\Payload\CreateEmployeePayload;
@@ -13,6 +13,6 @@ final class CreateEmployeeResponse
     {
         return new JsonResponse([
             'employee_id' => $payload->id,
-        ]);
+        ], 201);
     }
 }

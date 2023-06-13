@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Api\Action;
+namespace App\Ui\Api\Action;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Application\ActionHandler\AddDelegationHandler;
-use App\Application\Api\Response\AddDelegationResponse;
+use App\Ui\Api\Response\AddDelegationResponse;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
 
