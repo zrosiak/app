@@ -5,6 +5,7 @@ namespace App\Ui\Api\Action;
 
 use Symfony\Component\HttpFoundation\Response;
 use App\Application\ActionHandler\AddDelegationHandler;
+use App\Domain\ValueObject\Country;
 use App\Ui\Api\Response\AddDelegationResponse;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ final class AddDelegationAction
             (int) $request->get('id') ?: null,
             new DateTimeImmutable($request->get('start')),
             new DateTimeImmutable($request->get('end')),
-            $request->get('country'),
+            Country::fromString($request->get('country')),
         );
 
         return (new AddDelegationResponse())($result);

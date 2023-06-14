@@ -4,11 +4,12 @@ declare(strict_types=1);
 namespace App\Application\Service;
 
 use App\Domain\Entity\Employee;
+use App\Domain\ValueObject\Country;
 use App\Domain\Factory\EmployeeFactory;
-use App\Domain\Exception\EmployeeNotFoundException;
 use App\Domain\Factory\DelegationFactory;
-use App\Domain\Repository\DelegationRepositoryInterface;
+use App\Domain\Exception\EmployeeNotFoundException;
 use App\Domain\Repository\EmployeeRepositoryInterface;
+use App\Domain\Repository\DelegationRepositoryInterface;
 
 final class EmployeeService
 {
@@ -32,7 +33,7 @@ final class EmployeeService
         int $employee_id,
         \DateTimeInterface $start_date,
         \DateTimeInterface $end_date,
-        string $country
+        Country $country
     ): void {
         $employee = $this->employee_repository->find($employee_id);
 

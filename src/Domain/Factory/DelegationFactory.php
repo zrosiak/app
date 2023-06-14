@@ -5,6 +5,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\Entity\Employee;
 use App\Domain\Entity\Delegation;
+use App\Domain\ValueObject\Country;
 
 final class DelegationFactory
 {
@@ -12,7 +13,7 @@ final class DelegationFactory
         Employee $employee,
         \DateTimeInterface $start_date,
         \DateTimeInterface $end_date,
-        string $country
+        Country $country
     ): Delegation {
         return new Delegation(
             $employee,

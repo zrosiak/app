@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\ValueObject\Country;
 use App\Repository\DelegationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +33,7 @@ class Delegation
         Employee $employee,
         \DateTimeInterface $start_date,
         \DateTimeInterface $end_date,
-        string $country
+        Country $country
     ) {
         $this->employee = $employee;
         $this->start_date = $start_date;

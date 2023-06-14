@@ -3,9 +3,18 @@ declare(strict_types=1);
 
 namespace App\Domain\Enum;
 
-Enum PaymentRateEnum: int
+use App\Domain\Enum\CountryCodeEnum;
+use App\Domain\Provider\PaymentRateProviderInterface;
+
+Enum PaymentRateEnum implements PaymentRateProviderInterface
 {
-    case PL = 10;
-    case DE = 50;
-    case GB = 70;
+    public function rate(): int
+    {
+        return match($this)
+        {
+            CountryCodeEnum::PL => 10,
+            CountryCodeEnum::DE => 50,
+            CountryCodeEnum::GB => 70,
+        };
+    }
 }

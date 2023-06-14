@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Application\ActionHandler;
 
 use App\Application\Service\EmployeeService;
+use App\Domain\ValueObject\Country;
 
 final class AddDelegationHandler
 {
@@ -15,7 +16,7 @@ final class AddDelegationHandler
         int $employee_id,
         \DateTimeInterface $start_date,
         \DateTimeInterface $end_date,
-        string $country
+        Country $country
     ): void {
         $this->employee_service->addDelegation(
             $employee_id,
