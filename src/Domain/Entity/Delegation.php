@@ -38,7 +38,7 @@ class Delegation
         $this->employee = $employee;
         $this->start_date = $start_date;
         $this->end_date = $end_date;
-        $this->country = $country;
+        $this->country = (string) $country;
     }
 
     public function getId(): ?int
@@ -56,9 +56,9 @@ class Delegation
         return $this->end_date;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): ?Country
     {
-        return $this->country;
+        return Country::fromString($this->country);
     }
 
     public function getEmployee(): ?Employee

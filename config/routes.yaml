@@ -1,14 +1,17 @@
 create-employee:
-    path: /api/create-employee
-    controller: App\Ui\Api\Action\CreateEmployeeAction
-    methods: POST
+  path: /api/create-employee
+  controller: App\Ui\Api\Action\CreateEmployeeAction
+  methods: POST
+  format: json
 
 add-delegation:
-    path: /api/add-delegation
-    controller: App\Ui\Api\Action\AddDelegationAction
-    methods: POST
+  path: /api/add-delegation
+  controller: App\Ui\Api\Action\AddDelegationAction
+  methods: POST
+  format: json
 
 delegations-list:
-    path: /api/delegations-list/{id}
-    controller: App\Ui\Api\Action\DelegationsListAction
-    methods: GET
+  path: /api/delegations-list/{id}
+  controller: App\Ui\Api\Action\DelegationsListAction
+  methods: GET
+  format: json

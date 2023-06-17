@@ -3,24 +3,22 @@ declare(strict_types=1);
 
 namespace App\Ui\Api\Action;
 
+use App\Ui\Api\Response\NotFoundResponse;
+use App\Ui\Api\Action\AbstractQueryAction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Ui\Api\Response\NotFoundResponse;
-use App\Domain\Exception\EmployeeNotFoundException;
-use App\Application\ActionHandler\DelegationsListHandler;
+use App\Application\Query\DelegationsListQuery;
 use App\Ui\Api\Response\DelegationsListResponse;
+use App\Domain\Exception\EmployeeNotFoundException;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-final class DelegationsListAction
+final class DelegationsListAction extends AbstractQueryAction
 {
-    public function __construct(
-        private DelegationsListHandler $handler
-    ) {}
-
     public function __invoke(Request $request): Response
     {
         try {
-            $result = $this->handler->handle(
-                (int) $request->get('id') ?: null
+            $result = $this->query(
+                new DelegationsListQuery((int) $request->get('id') ?: null)
             );
         } catch (EmployeeNotFoundException) {
             return (new NotFoundResponse())();

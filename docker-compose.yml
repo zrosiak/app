@@ -22,6 +22,7 @@ services:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
       - DATABASE_URL=${DATABASE_URL}
+      - MESSENGER_TRANSPORT_DSN=amqp://guest:guest@rabbitmq:5672/%2f/messages
     volumes:
       - ./:/var/www
     networks:
@@ -38,6 +39,19 @@ services:
       - 5433:5432
     networks:
       - internal
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3
+    ports:
+      - 15672:15672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq:cached
+    networks:
+      - internal
+
+volumes:
+  rabbitmq:
 
 networks:
   internal:
