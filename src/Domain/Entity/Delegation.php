@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace App\Domain\Entity;
 
 use App\Domain\ValueObject\Country;
-use App\Repository\DelegationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DelegationRepository::class)]
+#[ORM\Entity]
 class Delegation
 {
     #[ORM\Id]
