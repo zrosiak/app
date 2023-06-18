@@ -5,11 +5,14 @@ RUN apt-get update && \
     pecl install apcu amqp xdebug redis && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     docker-php-ext-install -j$(nproc) zip opcache intl pdo_pgsql pgsql && \
-    docker-php-ext-enable apcu pdo_pgsql sodium && \
+    docker-php-ext-enable apcu pdo_pgsql sodium amqp xdebug redis && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
+
+#CMD ["/entrypoint.sh"]
+#ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 9000

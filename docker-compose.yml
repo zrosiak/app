@@ -22,9 +22,10 @@ services:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
       - DATABASE_URL=${DATABASE_URL}
-      - MESSENGER_TRANSPORT_DSN=amqp://guest:guest@rabbitmq:5672/%2f/messages
+      - MESSENGER_TRANSPORT_DSN=amqp://admin:admin@rabbitmq:5672/%2f/messages
     volumes:
       - ./:/var/www
+      - ./docker/php/entrypoint.sh:/entrypoint.sh
     networks:
       - internal
 
@@ -33,17 +34,39 @@ services:
     image: postgres:${POSTGRES_VERSION:-15}-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
       POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+    volumes:
+      - ./var/master/data:/var/lib/postgresql/data
     ports:
       - 5433:5432
+    networks:
+      - internal
+
+  database-slave:
+    container_name: database-slave
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
+      POSTGRES_MASTER_HOST: database
+      POSTGRES_MASTER_PORT: 5432
+    volumes:
+      - ./var/slave/data:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
     networks:
       - internal
 
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
     ports:
+      - 5672:5672
       - 15672:15672
     volumes:
       - rabbitmq:/var/lib/rabbitmq:cached

@@ -10,14 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Application\Query\DelegationsListQuery;
 use App\Ui\Api\Response\DelegationsListResponse;
 use App\Domain\Exception\EmployeeNotFoundException;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 final class DelegationsListAction extends AbstractQueryAction
 {
     public function __invoke(Request $request): Response
     {
         try {
-            $result = $this->query(
+            $result = $this->dispatch(
                 new DelegationsListQuery((int) $request->get('id') ?: null)
             );
         } catch (EmployeeNotFoundException) {

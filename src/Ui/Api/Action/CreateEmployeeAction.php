@@ -3,20 +3,17 @@ declare(strict_types=1);
 
 namespace App\Ui\Api\Action;
 
-use App\Application\Command\CreateEmployeeCommand;
+use App\Ui\Api\Action\AbstractCommandAction;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Ui\Api\Response\CreateEmployeeResponse;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Application\Command\CreateEmployeeCommand;
 
-final class CreateEmployeeAction
+final class CreateEmployeeAction extends AbstractCommandAction
 {
-    public function __construct(
-        private MessageBusInterface $message_bus,
-    ) {}
-
-    public function __invoke(): Response
+    public function __invoke(Request $request): Response
     {
-        $result = $this->message_bus->dispatch(
+        $result = $this->dispatch(
             new CreateEmployeeCommand()
         );
 

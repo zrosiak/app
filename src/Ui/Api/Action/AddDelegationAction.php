@@ -3,23 +3,19 @@ declare(strict_types=1);
 
 namespace App\Ui\Api\Action;
 
-use App\Application\Command\AddDelegationCommand;
 use DateTimeImmutable;
 use App\Domain\ValueObject\Country;
+use App\Ui\Api\Action\AbstractCommandAction;
 use Symfony\Component\HttpFoundation\Request;
 use App\Ui\Api\Response\AddDelegationResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Application\Command\AddDelegationCommand;
 
-final class AddDelegationAction
+final class AddDelegationAction extends AbstractCommandAction
 {
-    public function __construct(
-        private MessageBusInterface $message_bus,
-    ) {}
-
     public function __invoke(Request $request): Response
     {
-        $result = $this->message_bus->dispatch(
+        $result = $this->dispatch(
             new AddDelegationCommand(
                 (int) $request->get('id') ?: null,
                 new DateTimeImmutable($request->get('start')),

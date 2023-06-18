@@ -35,7 +35,7 @@ final class EmployeeService
         \DateTimeInterface $end_date,
         Country $country
     ): void {
-        $employee = $this->employee_repository->find($employee_id);
+        $employee = $this->employee_repository->getById($employee_id);
 
         if (!$employee) {
             throw new EmployeeNotFoundException();
@@ -54,7 +54,7 @@ final class EmployeeService
 
     public function getDeleagtions(int $employee_id): array
     {
-        $employee = $this->employee_repository->find($employee_id);
+        $employee = $this->employee_repository->getById($employee_id);
 
         if (!$employee) {
             throw new EmployeeNotFoundException();
