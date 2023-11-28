@@ -3,6 +3,8 @@
 * ADR
 * DDD
 
+* DDD: directory structure (used sensiolabs-de/deptrac to control layers dependencies)
+
 ## @TODO
 
 * CQRS
@@ -28,3 +30,24 @@
 "country":  "PL"
 }
 ```
+
+├── Core (Core bounded context)
+│   ├── Application
+│   │   ├── Command
+│   │   │   ├── AuthToken
+│   │   │   ├── Task
+│   │   │   └── User
+│   │   ├── Query
+│   │       └── Task
+│   ├── Domain
+│   │   └── Model
+│   │       ├── Task
+│   │       └── User
+│   ├── Infrastructure
+│   │   └── Repository
+│   └── Ports
+│       ├── Cli
+│       └── Rest
+└── Shared
+    ├── Domain
+    └── Infrastructure
