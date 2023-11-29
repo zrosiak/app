@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Infrastructure\Repository;
@@ -31,7 +32,7 @@ class EmployeeRepository extends AbstractDoctrineRepository implements EmployeeR
         }
     }
 
-    public function getById($id): ?Employee
+    public function getById(int $id): ?Employee
     {
         return $this->getRepository()->find($id);
     }

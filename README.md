@@ -15,6 +15,8 @@
 
 ## uruchomienie
 `docker-compose up -b`
+`docker exec -it php bash`
+`composer install`
 `php bin/console doctrine:migrations:migrate`
 
 ## API

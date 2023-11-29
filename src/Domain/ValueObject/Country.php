@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Domain\ValueObject;
@@ -9,7 +10,8 @@ use App\Domain\Exception\WrongCountryCodeException;
 final readonly class Country
 {
     public function __construct(private readonly CountryCodeEnum $code)
-    {}
+    {
+    }
 
     public static function fromString(string $code_name): self
     {

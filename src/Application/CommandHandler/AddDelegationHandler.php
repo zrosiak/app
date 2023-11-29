@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\CommandHandler;
@@ -11,9 +12,11 @@ final class AddDelegationHandler implements MessageHandlerInterface
 {
     public function __construct(
         private EmployeeService $employee_service
-    ) {}
+    ) {
+    }
 
-    public function __invoke(AddDelegationCommand $command): void {
+    public function __invoke(AddDelegationCommand $command): void
+    {
         $this->employee_service->addDelegation(
             $command->employee_id,
             $command->start_date,

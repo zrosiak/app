@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Application\Service;
@@ -33,7 +34,7 @@ final class EmployeeService
         int $employee_id,
         \DateTimeInterface $start_date,
         \DateTimeInterface $end_date,
-        Country $country
+        Country $country,
     ): void {
         $employee = $this->employee_repository->getById($employee_id);
 

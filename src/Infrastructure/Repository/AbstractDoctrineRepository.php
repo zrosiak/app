@@ -11,14 +11,16 @@ abstract class AbstractDoctrineRepository
 {
     public function __construct(
         private readonly EntityManagerInterface $entity_manager
-    ) {}
+    ) {
+    }
 
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->entity_manager;
     }
 
-    protected function getRepository(): ObjectRepositoryInterface {
+    protected function getRepository(): ObjectRepositoryInterface
+    {
         return $this->entity_manager->getRepository($this->getEntityClass());
     }
 
