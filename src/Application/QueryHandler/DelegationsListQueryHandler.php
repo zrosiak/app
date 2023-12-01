@@ -7,9 +7,10 @@ namespace App\Application\QueryHandler;
 use App\Application\Service\EmployeeService;
 use App\Application\Query\DelegationsListQuery;
 use App\Application\Payload\DelegationsListPayload;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class DelegationsListQueryHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class DelegationsListQueryHandler
 {
     public function __construct(
         private EmployeeService $employee_service

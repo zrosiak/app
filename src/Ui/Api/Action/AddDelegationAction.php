@@ -16,12 +16,13 @@ final class AddDelegationAction extends AbstractCommandAction
 {
     public function __invoke(Request $request): Response
     {
+        $payload = $request->getPayload();
         $result = $this->dispatch(
             new AddDelegationCommand(
-                (int) $request->get('id') ?: null,
-                new DateTimeImmutable($request->get('start')),
-                new DateTimeImmutable($request->get('end')),
-                Country::fromString($request->get('country')),
+                (int) $payload->get('id') ?: null,
+                new DateTimeImmutable($payload->get('start')),
+                new DateTimeImmutable($payload->get('end')),
+                Country::fromString($payload->get('country')),
             )
         );
 

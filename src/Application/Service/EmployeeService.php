@@ -53,6 +53,9 @@ final class EmployeeService
         $this->employee_repository->save($employee, true);
     }
 
+    /**
+     * @return array<int, \App\Domain\Entity\Delegation> $delegations
+     */
     public function getDeleagtions(int $employee_id): array
     {
         $employee = $this->employee_repository->getById($employee_id);

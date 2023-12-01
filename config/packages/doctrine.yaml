@@ -1,34 +1,26 @@
 doctrine:
     dbal:
-        default_connection: default
-        connections:
-          default:
-              url: '%env(DATABASE_URL)%'
-          slave:
-              url: '%env(DATABASE_SLAVE_URL)%'
+        url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '15'
+
+        profiling_collect_backtrace: '%kernel.debug%'
     orm:
-        default_entity_manager: default
-        entity_managers:
-          default:
-            connection: default
-            mappings:
-                App\Domain:
-                    is_bundle: false
-                    dir: '%kernel.project_dir%/src/Domain/Entity'
-                    prefix: 'App\Domain\Entity'
-                    alias: App\Domain
-          slave:
-            connection: slave
-            mappings:
-                App\Domain:
-                    is_bundle: false
-                    dir: '%kernel.project_dir%/src/Domain/Entity'
-                    prefix: 'App\Domain\Entity'
-                    alias: App\Domain
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Domain\Entity'
+                alias: App
 
 when@test:
     doctrine:

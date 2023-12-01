@@ -7,9 +7,10 @@ namespace App\Application\CommandHandler;
 use App\Application\Service\EmployeeService;
 use App\Application\Command\CreateEmployeeCommand;
 use App\Application\Payload\CreateEmployeePayload;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class CreateEmployeeHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class CreateEmployeeHandler
 {
     public function __construct(
         private EmployeeService $employee_service

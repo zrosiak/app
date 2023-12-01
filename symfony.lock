@@ -1,20 +1,20 @@
 {
     "doctrine/doctrine-bundle": {
-        "version": "2.10",
+        "version": "2.11",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "2.10",
-            "ref": "f0d8c9a4da17815830aac0d63e153a940ae176bb"
+            "ref": "0db4b12b5df45f5122213b4ecd18733ab7fa7d53"
         },
         "files": [
-            "./config/packages/doctrine.yaml",
-            "./src/Entity/.gitignore",
-            "./src/Repository/.gitignore"
+            "config/packages/doctrine.yaml",
+            "src/Entity/.gitignore",
+            "src/Repository/.gitignore"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
-        "version": "3.2",
+        "version": "3.3",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -22,8 +22,8 @@
             "ref": "1d01ec03c6ecbd67c3375c5478c9a423ae5d6a33"
         },
         "files": [
-            "./config/packages/doctrine_migrations.yaml",
-            "./migrations/.gitignore"
+            "config/packages/doctrine_migrations.yaml",
+            "migrations/.gitignore"
         ]
     },
     "phpstan/phpstan": {
@@ -49,9 +49,6 @@
         "files": [
             "phpcs.xml.dist"
         ]
-    },
-    "symfony-bundles/json-request-bundle": {
-        "version": "4.1.2"
     },
     "symfony/console": {
         "version": "6.3",

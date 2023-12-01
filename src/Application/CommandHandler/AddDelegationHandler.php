@@ -6,9 +6,10 @@ namespace App\Application\CommandHandler;
 
 use App\Application\Service\EmployeeService;
 use App\Application\Command\AddDelegationCommand;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class AddDelegationHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class AddDelegationHandler
 {
     public function __construct(
         private EmployeeService $employee_service
