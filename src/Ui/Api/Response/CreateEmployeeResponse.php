@@ -14,6 +14,6 @@ final class CreateEmployeeResponse
     {
         return new JsonResponse([
             'employee_id' => $payload->id,
-        ], 201);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

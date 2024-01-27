@@ -6,7 +6,7 @@ namespace App\Domain\Factory;
 
 use App\Domain\Entity\Employee;
 
-final class EmployeeFactory
+class EmployeeFactory
 {
     public function create(): Employee
     {

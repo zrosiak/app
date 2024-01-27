@@ -1,6 +1,27 @@
 version: '3'
 
 services:
+
+  php:
+    container_name: php
+    build:
+      context: ./docker/php
+    depends_on:
+      - database
+      - redis
+      - rabbitmq
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+      - MESSENGER_TRANSPORT_DSN=amqp://admin:admin@rabbitmq:5672/%2f/messages
+    volumes:
+      - ./:/var/www
+    ports:
+      - 9000:9000
+    networks:
+      - internal
+
   nginx:
     container_name: nginx
     image: nginx:latest
@@ -9,23 +30,6 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - 80:80
-    networks:
-      - internal
-
-  php:
-    container_name: php
-    build:
-      context: ./docker/php
-    depends_on:
-      - database
-    environment:
-      - APP_ENV=${APP_ENV}
-      - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=${DATABASE_URL}
-      - MESSENGER_TRANSPORT_DSN=amqp://admin:admin@rabbitmq:5672/%2f/messages
-    volumes:
-      - ./:/var/www
-      - ./docker/php/entrypoint.sh:/entrypoint.sh
     networks:
       - internal
 
@@ -73,8 +77,19 @@ services:
     networks:
       - internal
 
+  redis:
+    container_name: redis
+    image: redis:7
+    environment:
+      REDIS_PASSWORD: admin
+    ports:
+      - 6379:6379
+    networks:
+      - internal
+
 volumes:
   rabbitmq:
+
 
 networks:
   internal:

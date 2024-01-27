@@ -7,6 +7,7 @@ namespace App\Domain\Entity;
 use App\Domain\ValueObject\Country;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 class Delegation
@@ -16,18 +17,23 @@ class Delegation
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\DateTime()]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $start_date = null;
+    private \DateTimeInterface $start_date;
 
+    #[Assert\DateTime()]
+    #[Assert\GreaterThan(propertyPath: 'start_date')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $end_date = null;
+    private \DateTimeInterface $end_date;
 
+    #[Assert\Length(exactly: 2)]
     #[ORM\Column(length: 2)]
-    private ?string $country = null;
+    private string $country;
 
+    #[Assert\NotBlank]
     #[ORM\ManyToOne(inversedBy: 'delegations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Employee $employee = null;
+    private Employee $employee;
 
     public function __construct(
         Employee $employee,
@@ -46,22 +52,22 @@ class Delegation
         return $this->id;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): \DateTimeInterface
     {
         return $this->start_date;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): \DateTimeInterface
     {
         return $this->end_date;
     }
 
-    public function getCountry(): ?Country
+    public function getCountry(): Country
     {
         return Country::fromString($this->country);
     }
 
-    public function getEmployee(): ?Employee
+    public function getEmployee(): Employee
     {
         return $this->employee;
     }

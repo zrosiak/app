@@ -8,11 +8,14 @@ use App\Domain\Entity\Employee;
 use App\Domain\ValueObject\Country;
 use App\Domain\Factory\EmployeeFactory;
 use App\Domain\Factory\DelegationFactory;
+use Symfony\Component\Validator\Validation;
 use App\Domain\Exception\EmployeeNotFoundException;
+use App\Domain\Exception\WrongDelegationDateException;
 use App\Domain\Repository\EmployeeRepositoryInterface;
 use App\Domain\Repository\DelegationRepositoryInterface;
+use Symfony\Component\Validator\Exception\ValidationFailedException;
 
-final class EmployeeService
+class EmployeeService
 {
     public function __construct(
         private EmployeeFactory $employee_factory,
@@ -42,14 +45,33 @@ final class EmployeeService
             throw new EmployeeNotFoundException();
         }
 
+        $employee_existing_delegation = $this->delegation_repository->findByDateAndEmployee(
+            $employee,
+            $start_date,
+            $end_date
+        );
+
+        if ($employee_existing_delegation) {
+            throw new WrongDelegationDateException();
+        }
+
         $delegation = $this->delegation_factory->create(
             $employee,
             $start_date,
             $end_date,
             $country
         );
+
+        $validator = Validation::createValidatorBuilder()->getValidator();
+        $violations = $validator->validate($delegation);
+
+        if (count($violations)) {
+            throw new ValidationFailedException(null, $violations);
+        }
+
         $employee->addDelegation($delegation);
 
+        $this->delegation_repository->save($delegation, true);
         $this->employee_repository->save($employee, true);
     }
 

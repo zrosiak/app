@@ -12,7 +12,10 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-#CMD ["/entrypoint.sh"]
+COPY /entrypoint.sh /
+
+RUN chmod 777 /entrypoint.sh && chmod +x /entrypoint.sh
+
 #ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 9000

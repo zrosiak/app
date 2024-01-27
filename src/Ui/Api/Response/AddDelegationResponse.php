@@ -11,6 +11,6 @@ final class AddDelegationResponse
 {
     public function __invoke(): Response
     {
-        return new JsonResponse(null);
+        return new JsonResponse(null, JsonResponse::HTTP_ACCEPTED);
     }
 }

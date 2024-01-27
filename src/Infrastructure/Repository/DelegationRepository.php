@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Repository;
 
+use DateTimeInterface;
+use App\Domain\Entity\Employee;
 use App\Domain\Entity\Delegation;
-use App\Infrastructure\Repository\AbstractDoctrineRepository;
 use App\Domain\Repository\DelegationRepositoryInterface;
+use App\Infrastructure\Repository\AbstractDoctrineRepository;
 
 class DelegationRepository extends AbstractDoctrineRepository implements DelegationRepositoryInterface
 {
@@ -31,5 +33,13 @@ class DelegationRepository extends AbstractDoctrineRepository implements Delegat
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findByDateAndEmployee(
+        Employee $employee,
+        DateTimeInterface $date_from,
+        DateTimeInterface $date_to,
+    ): ?Delegation {
+        return $this->getRepository()->findOneBy(['employee' => $employee]);
     }
 }

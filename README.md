@@ -3,7 +3,7 @@
 * ADR
 * DDD
 
-* DDD: directory structure (used sensiolabs-de/deptrac to control layers dependencies)
+* DDD: directory structure (deptrac to control layers dependencies)
 
 ## @TODO
 

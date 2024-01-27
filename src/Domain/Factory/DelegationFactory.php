@@ -8,7 +8,7 @@ use App\Domain\Entity\Employee;
 use App\Domain\Entity\Delegation;
 use App\Domain\ValueObject\Country;
 
-final class DelegationFactory
+class DelegationFactory
 {
     public function create(
         Employee $employee,
