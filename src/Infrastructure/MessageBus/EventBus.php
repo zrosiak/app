@@ -8,7 +8,7 @@ use App\Application\Event\EventInterface;
 use App\Application\MessageBus\EventBusInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-abstract class EventBus implements EventBusInterface
+class EventBus implements EventBusInterface
 {
     public function __construct(
         private MessageBusInterface $event_bus,

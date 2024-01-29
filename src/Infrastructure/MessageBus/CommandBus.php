@@ -9,7 +9,7 @@ use App\Application\MessageBus\CommandBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-abstract class CommandBus implements CommandBusInterface
+class CommandBus implements CommandBusInterface
 {
     public function __construct(
         private MessageBusInterface $message_bus,

@@ -8,5 +8,5 @@ use App\Application\Event\EventInterface;
 
 interface EventBusInterface
 {
-    public function dispatch(EventInterface $event): mixed;
+    public function dispatch(EventInterface $event): void;
 }
