@@ -43,9 +43,9 @@ final class AddDelegationAction
                 )
             );
         } catch (EmployeeNotFoundException) {
-            return new JsonResponse(['message' => 'Nie znaleziono pracowanika o podanym id'], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(['message' => 'Employee not found'], JsonResponse::HTTP_NOT_FOUND);
         } catch (WrongDelegationDateException) {
-            return new JsonResponse(['message' => 'Pracownik może przebywać jednocześnie w 1 delegacji'], JsonResponse::HTTP_CONFLICT);
+            return new JsonResponse(['message' => 'An employee can be on only one delegation at a time'], JsonResponse::HTTP_CONFLICT);
         } catch (ValidationFailedException $validation_exception) {
             return new JsonResponse(['message' => (string) $validation_exception->getViolations()], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         } catch (Throwable $e) {

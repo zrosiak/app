@@ -40,6 +40,15 @@ class DelegationRepository extends AbstractDoctrineRepository implements Delegat
         DateTimeInterface $date_from,
         DateTimeInterface $date_to,
     ): ?Delegation {
-        return $this->getRepository()->findOneBy(['employee' => $employee]);
+        return $this->createQueryBuilder()
+            ->select('delegation')
+            ->from(Delegation::class, 'delegation')
+            ->where('delegation.employee = :employee')
+            ->andWhere('DATE_OVERLAPS(delegation.start_date, delegation.end_date, :date_from, :date_to) = true')
+            ->setParameter('employee', $employee)
+            ->setParameter('date_from', $date_from->format('Y-m-d H:i:s'))
+            ->setParameter('date_to', $date_to->format('Y-m-d H:i:s'))
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
