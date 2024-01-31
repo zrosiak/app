@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Service;
 
+use DateTimeInterface;
 use App\Domain\Entity\Employee;
 use App\Domain\ValueObject\Country;
 use App\Domain\Factory\EmployeeFactory;
@@ -35,8 +36,8 @@ class EmployeeService
 
     public function addDelegation(
         int $employee_id,
-        \DateTimeInterface $start_date,
-        \DateTimeInterface $end_date,
+        DateTimeInterface $start_date,
+        DateTimeInterface $end_date,
         Country $country,
     ): void {
         $employee = $this->employee_repository->getById($employee_id);

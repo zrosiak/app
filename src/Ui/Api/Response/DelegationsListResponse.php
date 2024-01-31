@@ -18,8 +18,8 @@ final class DelegationsListResponse
             $data[] = [
                 'start' => $delegation->getStartDate()->format('d-m-Y H:i:s'),
                 'end' => $delegation->getEndDate()->format('d-m-Y H:i:s'),
-                'country' => $delegation->getCountry(),
-                'amount_due' => 20,
+                'country' => (string) $delegation->getCountry(),
+                'amount_due' => $delegation->getAmountDue(),
                 'currency' => 'PLN',
             ];
         }

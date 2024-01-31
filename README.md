@@ -1,4 +1,4 @@
-## Metodyki
+## Architecture
 
 * ADR
 * DDD
@@ -11,7 +11,7 @@
 * phpcs
 * deptrac
 
-## Uruchomienie
+## Setup
 `docker-compose up -b`
 
 `docker exec -it php bash`
@@ -34,18 +34,14 @@
 }
 ```
 
-## Założenia biznesowe
-Implementacja API dla systemu do wyliczania kwoty diet należnej za delegację dla pracownika w firmie X.
-* delegacje mogą się odbywać tylko do poniższych krajów, gdzie obowiązują następujące stawki diet za dany dzień:
+## Business logic
+Implementation of an API for a system that calculates the amount of per diem allowance for an employee's business trip in company X.
+* business trips can only be made to the following countries, where the following per diem rates apply for each day:
     * PL: 10 PLN
     * DE: 50 PLN
     * GB: 75 PLN
-* data rozpoczęcia delegacji nie może być późniejsza niż data zakończenia delegacji
-* jednocześnie pracownik może przebywać tylko na 1 delegacji
-* dieta za dzień należy się tylko wtedy, gdy pracownik w danym dniu przebywa minimum 8 godzin w delegacji
-* za sobotę i niedzielę nie należy się dieta
-* jeśli delegacja trwa więcej niż 7 dni kalendarzowych to wtedy stawka diety za każdy dzień następujący po 7 dniu kalendarzowym jest podwójna
-
-## @TODO
-
-* obliczanie kwoty za delegację
+* the start date of the trip cannot be later than the end date
+* an employee can only be on one business trip at a time
+* a per diem allowance is only granted for a day when the employee spends a minimum of 8 hours on the trip
+* per diem allowance is not granted for Saturdays and Sundays
+* if the trip lasts more than 7 days, the per diem rate for each day after the 7th day is doubled

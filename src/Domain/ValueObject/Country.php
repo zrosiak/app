@@ -24,6 +24,11 @@ final readonly class Country
         throw new WrongCountryCodeException();
     }
 
+    public function rate(): int
+    {
+        return $this->code->rate();
+    }
+
     public function __toString()
     {
         return $this->code->name;
